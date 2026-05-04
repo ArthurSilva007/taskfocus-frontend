@@ -1,0 +1,56 @@
+@startuml
+title TaskFocus Frontend Architecture (Resumo)
+
+package "Frontend (Angular)" {
+  [Browser] as Browser
+  node "Angular App (src/)" as AngularApp {
+    [Components]
+    [Pages]
+    [Services]
+    [Interceptors]
+    [Models]
+    [Environments]
+  }
+  AngularApp -down-> Browser : Serves UI
+}
+
+package "Build Output" {
+  folder "dist/taskfocus-frontend/" {
+    [browser/] as BrowserDist
+    [server/] as ServerDist
+  }
+}
+
+package "Server" {
+  [server.ts (Express + SSR)] as SSRServer
+}
+
+package "Backend API" {
+  [API Server] as API
+  database "Database" as DB
+}
+
+package "Deployment" {
+  [Nginx/Apache] as WebServer
+  [PM2 / Node] as ProcessManager
+  [Docker] as Docker
+}
+
+' Relations
+Browser -> AngularApp : user interacts
+AngularApp ..> Services : uses
+AngularApp ..> Interceptors : attaches tokens
+AngularApp ..> Environments : reads apiUrl
+Services --> API : HTTP requests (apiUrl)
+Interceptors --> Services : adds Authorization header
+SSRServer --> API : Server-side calls (SSR)
+SSRServer --> ServerDist : serves server.mjs
+BrowserDist -left-> WebServer : static files
+ServerDist --> ProcessManager : run server.mjs
+ProcessManager -> SSRServer
+WebServer --> SSRServer : proxy /api to API or forward
+API --> DB : reads/writes data
+Docker ..> WebServer
+Docker ..> ProcessManager
+
+@enduml

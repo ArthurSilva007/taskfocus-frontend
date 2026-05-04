@@ -1,0 +1,93 @@
+@import '../../../styles.scss';
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--card-background);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-title {
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  span {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+
+  i {
+    color: var(--text-color-muted);
+  }
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+
+    &::placeholder {
+      color: var(--text-color-muted);
+    }
+  }
+}
+
+.icon-button {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--text-color-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}

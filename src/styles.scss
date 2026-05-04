@@ -1,0 +1,62 @@
+/* ========================================= */
+/* DEFINIÇÕES GLOBAIS DE ESTILO         */
+/* ========================================= */
+
+// Paleta de Cores (extraída do seu design)
+:root {
+  --cor-fundo-principal: #10111A; // O azul bem escuro do fundo
+  --cor-fundo-secundario: #1A1A2E; // O tom mais claro dos cards
+  --cor-primaria-accent: #6C63FF; // O roxo/azul do botão principal e detalhes
+  --cor-texto-principal: #FFFFFF;
+  --cor-texto-secundario: #A9A9A9; // Para textos mais sutis
+  --cor-borda: #33334D;
+  --cor-sucesso: #50fa7b;
+  --cor-erro: #ff5555;
+  --cor-info: #8be9fd;
+}
+/* ... (todo o seu código SCSS existente) ... */
+
+/* --- TEMA CLARO --- */
+body.light-theme {
+  // Cores de fundo
+  --background-color: #f4f7fa;
+  --card-background: #ffffff;
+
+  // Cores de texto
+  --text-color: #1a202c;
+  --text-color-light: #4a5568;
+  --text-color-muted: #718096;
+
+  // Outras cores
+  --border-color: #e2e8f0;
+  --secondary-button-bg: #e2e8f0;
+
+  // Estilo da sidebar no tema claro
+  .sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+  }
+
+  // Estilo dos inputs no tema claro
+  input, select, textarea {
+    background-color: #f4f7fa;
+    border: 1px solid #e2e8f0;
+    color: #1a202c;
+  }
+}
+
+// Estilos Globais do Corpo da Página
+body {
+  background-color: var(--cor-fundo-principal);
+  color: var(--cor-texto-principal);
+  font-family: 'Poppins', sans-serif; // Vamos assumir Poppins por enquanto, é uma ótima fonte web.
+}
+
+// Estilização padrão para os toasts do ngx-toastr
+.toast-container .ngx-toastr {
+  background-color: #282A36 !important;
+  box-shadow: 0 0 12px #000 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--cor-borda) !important;
+}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

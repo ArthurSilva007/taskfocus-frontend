@@ -1,0 +1,70 @@
+<div class="modal-backdrop" (click)="close()"></div>
+<div class="modal-content" (click)="$event.stopPropagation()">
+  <div class="modal-header">
+    <h3>{{ taskToEdit ? 'Editar' : 'Registrar' }} Item</h3>
+    <button class="close-button" (click)="close()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group type-selector">
+        <label>Tipo</label>
+        <div class="radio-group">
+          <input type="radio" id="type-tarefa" formControlName="type" value="Tarefa">
+          <label for="type-tarefa">Tarefa</label>
+          <input type="radio" id="type-transacao" formControlName="type" value="Transacao">
+          <label for="type-transacao">Transação</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" id="title" formControlName="title" placeholder="Ex: Reunião com equipe de design">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descrição (Opcional)</label>
+        <textarea id="description" formControlName="description" rows="3"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dueDate">Data</label>
+          <input type="date" id="dueDate" formControlName="dueDate">
+        </div>
+        <div class="form-group">
+          <label for="dueTime">Hora</label>
+          <input type="time" id="dueTime" formControlName="dueTime">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="category">Categoria (Opcional)</label>
+          <input type="text" id="category" formControlName="category" placeholder="Ex: Trabalho, Finanças">
+        </div>
+
+        <div class="form-group" *ngIf="!isTransaction">
+          <label for="priority">Prioridade</label>
+          <select id="priority" formControlName="priority">
+            <option value="BAIXA">Baixa</option>
+            <option value="MEDIA" selected>Média</option>
+            <option value="ALTA">Alta</option>
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="isTransaction">
+          <label for="value">Valor (R$)</label>
+          <input type="number" id="value" formControlName="value" placeholder="150.00">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">
+          {{ taskToEdit ? 'Atualizar' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

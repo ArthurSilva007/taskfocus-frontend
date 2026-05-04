@@ -1,0 +1,97 @@
+<app-header [userName]="userName"></app-header>
+
+<main class="dashboard-container">
+  <div class="dashboard-grid">
+
+    <div class="card chart-card">
+      <h3>Progresso de hábitos semanais</h3>
+      <app-bar-chart></app-bar-chart>
+    </div>
+
+    <div class="card summary-card">
+      <h3>Resumo financeiro do mês</h3>
+      <div class="financial-details">
+        <div class="financial-item">
+          <span>Receita</span>
+          <strong class="income">{{ financialSummary | currency:'BRL' }}</strong>
+        </div>
+        <div class="financial-item">
+          <span>Despesas</span>
+          <strong class="expense">{{ monthlyExpenses | currency:'BRL' }}</strong>
+        </div>
+      </div>
+      <app-pie-chart [chartId]="'financial-summary-chart'"></app-pie-chart>
+    </div>
+
+    <div class="card chart-card-pie">
+      <h3>Distribuição de tipos de Hábitos</h3>
+      <app-pie-chart [chartId]="'habits-distribution-chart'"></app-pie-chart>
+    </div>
+
+    <div class="card indicator-card-group">
+      <div class="indicator-card">
+        <div class="indicator-icon-wrapper"><i class="fas fa-check-circle"></i></div>
+        <div class="indicator-content">
+          <p>{{ habitsCompleted }}%</p>
+          <span>Hábitos concluídos</span>
+        </div>
+      </div>
+      <div class="indicator-card">
+        <div class="indicator-icon-wrapper"><i class="fas fa-chart-line"></i></div>
+        <div class="indicator-content">
+          <p>{{ dailyAverage }}</p>
+          <span>Média diária de hábitos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card task-registration-card">
+      <h3>Ações Rápidas</h3>
+      <button class="btn-primary" (click)="openTaskForm()">+ Nova Tarefa / Transação</button>
+    </div>
+
+    <div class="card full-task-list-card">
+      <h3>Minhas Tarefas e Transações</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Título</th>
+          <th>Detalhe</th>
+          <th>Vencimento</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>
+                      <span *ngIf="task.priority" class="badge" [ngClass]="getPriorityClass(task.priority)">
+                        {{ task.priority | titlecase }}
+                      </span>
+            <span *ngIf="task.value" class="badge transaction-badge">
+                        {{ task.value | currency:'BRL' }}
+                      </span>
+          </td>
+          <td>{{ task.dueDate | date:'dd/MM/yyyy' }}</td>
+          <td>{{ task.status | titlecase }}</td>
+          <td class="actions">
+            <button (click)="openTaskForm(task)"><i class="fas fa-pencil-alt"></i></button>
+            <button class="btn-icon btn-icon-danger" (click)="deleteTask(task.id!)" title="Deletar Tarefa"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="tasks.length === 0">
+          <td colspan="5" class="no-tasks-message">Nenhuma tarefa encontrada. Adicione uma!</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<app-task-form-modal
+  *ngIf="isTaskFormVisible"
+  [taskToEdit]="taskToEdit"
+  (closeModal)="closeTaskForm()"
+  (formSubmitted)="handleFormSubmission($event)">
+</app-task-form-modal>

@@ -1,0 +1,117 @@
+@import '../../../styles.scss';
+
+:host {
+  display: block;
+}
+
+.notifications-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.notifications-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  .fa-bell {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: var(--text-color-muted);
+    font-size: 1.1rem;
+  }
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: var(--card-background);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border-left: 5px solid transparent; // Borda padrão
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &.highlight-red {
+    border-left-color: var(--danger-color);
+  }
+  &.highlight-yellow {
+    border-left-color: var(--warning-color);
+  }
+}
+
+.notification-icon {
+  font-size: 1.5rem;
+  color: var(--text-color-muted);
+  width: 40px;
+  text-align: center;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+  }
+  .details {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+  }
+}
+
+.notification-value {
+  .value-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+}
+
+// Estilos específicos de destaque
+.highlight-red .notification-icon {
+  color: var(--danger-color);
+}
+.highlight-yellow .notification-icon {
+  color: var(--warning-color);
+}
+.highlight-red .value-badge {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-color-muted);
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--success-color);
+  }
+}

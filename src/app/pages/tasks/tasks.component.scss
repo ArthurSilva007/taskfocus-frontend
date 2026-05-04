@@ -1,0 +1,144 @@
+@import '../../../styles.scss';
+
+.tasks-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.tasks-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+  h1 { margin: 0; font-size: 2rem; font-weight: 600; }
+  p { color: var(--text-color-muted); font-size: 1.1rem; }
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+
+  .search-group {
+    min-width: 250px;
+    flex-grow: 2; // Dá mais espaço para a busca
+  }
+  .search-input-wrapper {
+    position: relative;
+    i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-color-muted);
+    }
+    input {
+      width: 100%;
+      padding: 0.7rem 0.7rem 0.7rem 35px; // Espaço para o ícone
+      background-color: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+  }
+
+  // **CORREÇÃO:** Estas regras foram movidas para fora do 'input'
+  .filter-group {
+    flex-grow: 1;
+    label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+  }
+  .btn-primary {
+    padding: 0.7rem 1.5rem;
+  }
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.task-card {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 5px solid;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+  &.priority-alta { border-left-color: var(--danger-color); }
+  &.priority-media { border-left-color: var(--warning-color); }
+  &.priority-baixa { border-left-color: var(--success-color); }
+}
+
+.card-priority-tag {
+  align-self: flex-start;
+  background-color: rgba(255,255,255,0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-content {
+  flex-grow: 1;
+  h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+  p { color: var(--text-color-muted); font-size: 0.9rem; line-height: 1.5; }
+}
+
+.card-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .due-date { color: var(--text-color-muted); font-size: 0.9rem; }
+  .card-actions {
+    display: flex;
+    gap: 0.5rem;
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--text-color-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+      &:hover { color: var(--primary-color); }
+      &.action-delete:hover { color: var(--danger-color); }
+      // **CORREÇÃO:** Ícone de check do bootstrap icons
+      .bi-check-circle-fill {
+        color: var(--success-color);
+      }
+    }
+  }
+}
+
+.no-tasks {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-color-muted);
+  i { font-size: 3rem; margin-bottom: 1rem; }
+}

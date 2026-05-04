@@ -1,0 +1,80 @@
+<main class="tasks-container">
+  <div class="tasks-header">
+    <i class="bi bi-card-checklist"></i>
+    <h1>Minhas Tarefas</h1>
+    <p>Visualize, filtre e gerencie todas as suas atividades.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-group search-group">
+      <label for="search-input">Buscar por Título</label>
+      <div class="search-input-wrapper">
+        <i class="bi bi-search"></i>
+        <input id="search-input" type="text" placeholder="Digite para buscar..."
+               [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label for="status-filter">Status</label>
+      <select id="status-filter" [(ngModel)]="filterByStatus" (ngModelChange)="applyFilters()">
+        <option value="TODOS">Todos</option>
+        <option value="A_FAZER">A Fazer</option>
+        <option value="EM_PROGRESSO">Em Progresso</option>
+        <option value="CONCLUIDO">Concluído</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="priority-filter">Prioridade</label>
+      <select id="priority-filter" [(ngModel)]="filterByPriority" (ngModelChange)="applyFilters()">
+        <option value="TODAS">Todas</option>
+        <option value="ALTA">Alta</option>
+        <option value="MEDIA">Média</option>
+        <option value="BAIXA">Baixa</option>
+      </select>
+    </div>
+    <button class="btn-primary" (click)="openTaskForm()">+ Adicionar</button>
+  </div>
+
+  <div class="tasks-grid">
+    <div *ngFor="let task of filteredTasks" class="task-card" [ngClass]="getPriorityClass(task.priority)">
+      <div class="card-priority-tag">{{ task.priority || 'Transação' | titlecase }}</div>
+
+      <div class="card-content">
+        <h3>{{ task.title }}</h3>
+        <p *ngIf="task.description">{{ task.description }}</p>
+      </div>
+
+      <div class="card-footer">
+        <span class="due-date">
+          <i class="bi bi-calendar-event"></i> {{ task.dueDate | date:'dd/MM/yyyy' }}
+        </span>
+        <div class="card-actions">
+          <button class="action-btn" title="Concluir/Desfazer" (click)="toggleStatus(task)">
+            <i [class]="task.status === 'CONCLUIDO' ? 'bi bi-check-circle-fill' : 'bi bi-circle'"></i>
+          </button>
+          <button class="action-btn" title="Editar" (click)="openTaskForm(task)">
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+          <button class="action-btn action-delete" title="Excluir" (click)="deleteTask(task.id!)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="filteredTasks.length === 0" class="no-tasks">
+    <i class="bi bi-search"></i>
+    <p>Nenhuma tarefa encontrada com os filtros selecionados.</p>
+  </div>
+</main>
+
+
+<app-task-form-modal
+  *ngIf="isTaskFormVisible"
+  [taskToEdit]="taskToEdit"
+  (closeModal)="closeTaskForm()"
+  (formSubmitted)="handleFormSubmission($event)">
+</app-task-form-modal>

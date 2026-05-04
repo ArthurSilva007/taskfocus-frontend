@@ -1,0 +1,32 @@
+<app-header [userName]="userName"></app-header>
+
+<main class="notifications-container">
+  <div class="notifications-header">
+    <i class="bi bi-bell-fill"></i> <h1>Notificações / Alertas</h1>
+    <p>Lista de lembretes e avisos importantes.</p>
+  </div>
+
+  <div class="notifications-list">
+    <div *ngFor="let notification of notifications"
+         class="notification-item"
+         [ngClass]="getHighlightClass(notification)">
+
+      <div class="notification-icon">
+        <i [class]="notification.icon"></i>
+      </div>
+
+      <div class="notification-content">
+        <span class="title">{{ notification.title }}</span>
+        <span class="details">{{ notification.details }}</span>
+      </div>
+
+      <div class="notification-value" *ngIf="notification.value">
+        <span class="value-badge">{{ notification.value }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="notifications.length === 0" class="no-notifications">
+      <i class="bi bi-check-circle-fill"></i> <p>Tudo em dia! Você não tem novas notificações.</p>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,62 @@
+<main class="settings-container">
+  <div class="settings-header">
+    <i class="bi bi-gear-fill"></i>
+    <h1>Configurações / Preferências</h1>
+    <p>Personalize a aparência e o comportamento da sua aplicação.</p>
+  </div>
+
+  <div class="settings-section">
+    <div class="setting-item">
+      <div class="item-info">
+        <h3>Tema</h3>
+        <p>Escolha entre o tema claro ou escuro.</p>
+      </div>
+      <div class="item-control">
+        <div class="theme-selector">
+          <label>
+            <input type="radio" name="theme" value="light" [(ngModel)]="selectedTheme" (ngModelChange)="onThemeChange()">
+            <i class="bi bi-sun-fill"></i> Claro
+          </label>
+          <label>
+            <input type="radio" name="theme" value="dark" [(ngModel)]="selectedTheme" (ngModelChange)="onThemeChange()">
+            <i class="bi bi-moon-stars-fill"></i> Escuro
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="item-info">
+        <h3>Notificações por e-mail</h3>
+        <p>Receber alertas e lembretes de tarefas no seu e-mail.</p>
+      </div>
+      <div class="item-control">
+        <label class="toggle-switch">
+          <input type="checkbox" [(ngModel)]="emailNotifications" (ngModelChange)="onNotificationsToggle()">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="item-info">
+        <h3>Categorias personalizadas</h3>
+        <p>Adicione novas categorias para organizar suas tarefas e transações.</p>
+      </div>
+      <div class="item-control category-adder">
+        <input type="text" placeholder="Nome da nova categoria" [(ngModel)]="newCategory" (keyup.enter)="addCategory()">
+        <button class="btn-primary" (click)="addCategory()">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="setting-item danger-zone">
+      <div class="item-info">
+        <h3>Excluir conta</h3>
+        <p>Esta ação removerá permanentemente todos os seus dados.</p>
+      </div>
+      <div class="item-control">
+        <button class="btn-danger" (click)="deleteAccount()">Excluir minha conta</button>
+      </div>
+    </div>
+  </div>
+</main>
