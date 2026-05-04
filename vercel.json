@@ -4,7 +4,7 @@
     {
       "src": "package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist/taskfocus-frontend" }
+      "config": { "distDir": "dist/taskfocus-frontend/browser" }
     }
   ],
   "routes": [
