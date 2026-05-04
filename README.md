@@ -27,7 +27,20 @@ Diagrama do projeto:
 
 - Arquivo PlantUML: `docs/ARCHITECTURE.puml`
 
-Diagrama (visão rápida):
+Diagrama (visão rápida - Mermaid):
+
+```mermaid
+flowchart TD
+  Browser[Browser] --> AngularApp[Angular App (src/)]
+  AngularApp --> Services[Services]
+  Services --> API[/api/*]
+  AngularApp --> Interceptor[Auth Interceptor]
+  API --> DB[(Database)]
+  BrowserDist[dist/taskfocus-frontend/browser] --- Nginx[Nginx/Apache]
+  ServerDist[dist/taskfocus-frontend/server] --- PM2[PM2 / Node (SSR)]
+```
+
+Diagrama (visão rápida - texto):
 
 ```
 Browser -> Angular App (src/)
